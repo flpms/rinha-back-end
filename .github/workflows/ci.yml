@@ -40,11 +40,11 @@ jobs:
         echo GATLING_OUTPUT_FOLDER=$(ls $WORKSPACE/user-files/results | sort | head -n 1) >> $GITHUB_ENV
       env:
         WORKSPACE: ${{ github.workspace }}/rinha-de-backend-2023-q3/stress-test
-    - run: echo $GITHUB_SHA
+    - run: echo ${{ env.GATLING_OUTPUT_FOLDER }}
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{ github.workspace }}/rinha-de-backend-2023-q3/stress-test/user-files/results/$GITHUB_SHA
-        destination_dir: $GITHUB_SHA
-    - run: echo "[Deploying to https://${{ github.repository_owner }}.github.io/${{ env.GH_REPO }}/$GITHUB_SHA](https://${{ github.repository_owner }}.github.io/${{ env.GH_REPO }}/$GITHUB_SHA)" >> "${GITHUB_STEP_SUMMARY}"
+        publish_dir: ${{ github.workspace }}/rinha-de-backend-2023-q3/stress-test/user-files/results/$/${{ env.GATLING_OUTPUT_FOLDER }}
+        destination_dir: $/${{ env.GATLING_OUTPUT_FOLDER }}
+    - run: echo "[Deploying to https://${{ github.repository_owner }}.github.io/${{ env.GH_REPO }}/$/${{ env.GATLING_OUTPUT_FOLDER }}](https://${{ github.repository_owner }}.github.io/${{ env.GH_REPO }}/$/${{ env.GATLING_OUTPUT_FOLDER }})" >> "${GITHUB_STEP_SUMMARY}"
