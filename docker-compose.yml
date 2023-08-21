@@ -1,0 +1,52 @@
+version: '3.5'
+services:
+  db: # Banco de dados
+    image: mongo:6.0.9-jammy
+    ports:
+      - "27017:27017/tcp"
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: passRoot
+      MONGO_INITDB_DATABASE: admin
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
+  api:
+    build:
+      context: ./
+    environment:
+      PORT: 3001
+      DB_USER: rinhaRoot
+      DB_PASS: rinhaRootSecret
+      DB_SRVR: db
+      DB_NAME: RINHA_DB
+      DB_PORT: 27017
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: '0.5GB'
+  nginx: # Load Balancer
+    image: nginx:stable-alpine
+    restart: always
+    volumes:
+      - ./rinha-nginx.conf:/etc/nginx/nginc.conf:ro
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "0.5GB"
+
