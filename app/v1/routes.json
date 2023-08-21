@@ -1,0 +1,12 @@
+{
+  "defaultRoot": {
+    "path": "/",
+    "method": "all",
+    "auth": ""
+  },
+  "postPessoas": {
+    "path": "/pessoas",
+    "method": "post",
+    "validate": true
+  }
+}
