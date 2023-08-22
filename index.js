@@ -2,7 +2,6 @@
 console.log('service start');
 const http = require('http');
 const exp = require('express');
-const timeout = require('connect-timeout')
 const DB = require('simple-connection');
 
 const Joi = require('joi');
@@ -47,7 +46,6 @@ const apiInst = exp();
 
 const { v1 } = routes(deps);
 
-apiInst.use(timeout('1s'));
 apiInst.use(exp.json({ limit: '20kb' }));
 apiInst.use(exp.urlencoded({ extended: true }));
 
