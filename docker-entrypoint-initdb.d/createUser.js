@@ -11,4 +11,10 @@ db.createUser(
   }
 );
 
+db.pessoas.createIndex({
+  apelido: 1
+}, {
+  unique: true
+});
+db.users.getIndexes();
 db.createCollection('pessoas');

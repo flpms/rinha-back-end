@@ -7,8 +7,7 @@ const DB = require('simple-connection');
 
 const Joi = require('joi');
 const dtenv = require('dotenv');
-dtenv.config();
-
+const uuid = require('uuid');
 
 const Router = require('express').Router;
 
@@ -19,6 +18,8 @@ const resHandler = require('./lib/res-handler');
 const rqValidation = require('./lib/req-validation');
 const rtProcessor = require('./lib/route-processor');
 const genSchemaObj = require('./lib/gen-schema-obj');
+
+dtenv.config();
 
 console.log('DBConn', process.env.DB_SRVR + '/' +process.env.DB_NAME);
 const deps = {
@@ -39,6 +40,7 @@ const deps = {
   rqValidation,
   rtProcessor,
   genSchemaObj,
+  uuid,
 }
 
 const apiInst = exp();

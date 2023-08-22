@@ -5,8 +5,14 @@ const PessoasBody = j => j.object({
   stack: j.array().items(j.string().max(32)).allow(null).optional(),
 });
 
-const PessoasParams = j => j.object({
-  id: j.number().integer().required()
+const PessoaParams = j => j.object({
+  id: j.string().guid({
+    version: ['uuidv4']
+  }).required(),
+});
+
+const PessoasQuery = j => j.object({
+  t: j.string().required(),
 });
 
 module.exports = J => ({
@@ -15,9 +21,14 @@ module.exports = J => ({
       body: PessoasBody(J)
     }
   },
+  getPessoa: {
+    get: {
+      params: PessoaParams(J)
+    }
+  },
   getPessoas: {
     get: {
-      params: PessoasParams(J)
+      query: PessoasQuery(J)
     }
   }
 })

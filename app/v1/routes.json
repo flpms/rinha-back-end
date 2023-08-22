@@ -8,5 +8,15 @@
     "path": "/pessoas",
     "method": "post",
     "validate": true
+  },
+  "getPessoa": {
+    "path": "/pessoas/:id",
+    "method": "get",
+    "validate": true
+  },
+  "getPessoas": {
+    "path": "/pessoas",
+    "method": "get",
+    "validate": true
   }
 }
