@@ -9,6 +9,7 @@ const PessoasPostController = ({
     p.creationDate = Date.now();
     p.id = uuid.v4();
     const res = await pessoasRepository.insertOne(p);
+    rs.location(`/pessoas/${p.id}`)
     return onRes.CREATED({
       message: 'Pessoa cadastrada com sucesso',
       data: res.ops.pop(),
