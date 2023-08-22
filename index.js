@@ -52,7 +52,7 @@ apiInst.use(exp.json({ limit: '20kb' }));
 apiInst.use(exp.urlencoded({ extended: true }));
 
 apiInst.use(cors);
-apiInst.use('/v1', v1);
+apiInst.use(v1);
 
 apiInst.use((req, rs, next) => {
   const err = new Error();
