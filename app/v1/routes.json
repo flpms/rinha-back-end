@@ -18,5 +18,9 @@
     "path": "/pessoas",
     "method": "get",
     "validate": true
+  },
+  "getCountPessoas": {
+    "path": "/contagem-pessoas",
+    "method": "get"
   }
 }

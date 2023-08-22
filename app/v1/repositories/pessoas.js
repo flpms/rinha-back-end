@@ -14,7 +14,8 @@ const PessoasRepos = dependencies => {
     find: async p => {
       const result = await col('find', p);
       return result.toArray();
-    }
+    },
+    countDocuments: () => col('countDocuments')
   });
 }
 
