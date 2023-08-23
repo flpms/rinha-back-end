@@ -17,7 +17,7 @@ const PessoaGetController = ({
 
     return onRes.OK(res);
   } catch(err) {
-    console.log(err);
+    console.error(err);
     onRes.SERVICE_UNAVAILABLE({
       message: 'Erro ao processar requisição',
     });

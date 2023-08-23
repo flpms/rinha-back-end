@@ -64,6 +64,9 @@ apiInst.use((err, rq, res) =>
 
 const server = http.createServer(apiInst);
 server.listen(process.env.PORT || 3000);
+server.keepAliveTimeout = 5 * 1000;
+server.headersTimeout = 6 * 1000;
+
 server.on('error', console.error);
 process.on('error', console.error);
 
