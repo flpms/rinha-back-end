@@ -14,8 +14,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.75'
-          memory: '1.5GB'
+          cpus: '0.5'
+          memory: '1GB'
   api1:
     build:
       context: ./
@@ -33,8 +33,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
-          memory: '0.5GB'
+          cpus: '0.38'
+          memory: '0.25GB'
   api2:
     build:
       context: ./
@@ -53,8 +53,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
-          memory: '0.5GB'
+          cpus: '0.37'
+          memory: '0.25GB'
   nginx: # Load Balancer
     image: nginx:stable-alpine
     restart: always
@@ -69,5 +69,5 @@ services:
       resources:
         limits:
           cpus: "0.25"
-          memory: "1GB"
+          memory: "0.5GB"
 

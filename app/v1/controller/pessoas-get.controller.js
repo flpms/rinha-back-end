@@ -11,6 +11,8 @@ const PessoaGetController = ({
         { stack: { $regex: t, $options: 'i' } },
         { apelido: { $regex: t, $options: 'i' } },
       ],
+    }, {
+      limit: 50
     });
 
     if (!res.length) {

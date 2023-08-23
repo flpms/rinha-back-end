@@ -7,8 +7,7 @@
   "postPessoas": {
     "path": "/pessoas",
     "method": "post",
-    "validate": true,
-    "syntax": true
+    "validate": true
   },
   "getPessoa": {
     "path": "/pessoas/:id",
