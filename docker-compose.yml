@@ -30,31 +30,32 @@ services:
       - "3001:3001"
     depends_on:
       - db
-    deploy:
-      resources:
-        limits:
-          cpus: '0.38'
-          memory: '0.25GB'
-  api2:
-    build:
-      context: ./
-    environment:
-      PORT: 3002
-      DB_USER: rinhaRoot
-      DB_PASS: rinhaRootSecret
-      DB_SRVR: db
-      DB_NAME: RINHA_DB
-      DB_PORT: 27017
     restart: always
-    ports:
-      - "3002:3002"
-    depends_on:
-      - db
     deploy:
       resources:
         limits:
-          cpus: '0.37'
-          memory: '0.25GB'
+          cpus: '0.5'
+          memory: '0.5GB'
+  # api2:
+  #   build:
+  #     context: ./
+  #   environment:
+  #     PORT: 3002
+  #     DB_USER: rinhaRoot
+  #     DB_PASS: rinhaRootSecret
+  #     DB_SRVR: db
+  #     DB_NAME: RINHA_DB
+  #     DB_PORT: 27017
+  #   restart: always
+  #   ports:
+  #     - "3002:3002"
+  #   depends_on:
+  #     - db
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.37'
+  #         memory: '0.25GB'
   nginx: # Load Balancer
     image: nginx:stable-alpine
     restart: always
@@ -62,12 +63,11 @@ services:
       - ./rinha-nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - api1
-      - api2
     ports:
       - "9999:9999"
     deploy:
       resources:
         limits:
-          cpus: "0.25"
+          cpus: "0.5"
           memory: "0.5GB"
 
