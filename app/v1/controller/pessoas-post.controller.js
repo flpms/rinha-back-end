@@ -5,9 +5,18 @@ const PessoasPostController = ({
 }) => async (rq, rs) => {
   const p = rq.data.body.value;
   const onRes = resHandler(rq, rs);
+  const nullField = Object.keys(p).filter(k => k !== 'stack' && !p[k]).length;
+
+  if (!!nullField) {
+    return onRes.UNPROCESSABLE_ENTITY({
+      message: 'Campos obrigatórios não preenchidos',
+    });
+  };
+
   try {
     p.creationDate = Date.now();
     p.id = uuid.v4();
+
     const res = await pessoasRepository.insertOne(p);
     rs.location(`/pessoas/${p.id}`)
     return onRes.CREATED({

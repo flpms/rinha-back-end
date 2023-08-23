@@ -26,6 +26,7 @@ services:
       DB_SRVR: db
       DB_NAME: RINHA_DB
       DB_PORT: 27017
+    restart: always
     ports:
       - "3001:3001"
     depends_on:
@@ -45,6 +46,7 @@ services:
       DB_SRVR: db
       DB_NAME: RINHA_DB
       DB_PORT: 27017
+    restart: always
     ports:
       - "3002:3002"
     depends_on:
