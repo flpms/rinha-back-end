@@ -1,7 +1,7 @@
 const PessoasBody = j => j.object({
   apelido: j.string().max(23).allow(null).required(),
   nome: j.string().max(100).allow(null).required(),
-  nascimento: j.date().allow(null).required(),
+  nascimento: j.date().format('YYYY-MM-DD').allow(null).required(),
   stack: j.array().items(j.string().max(32)).allow(null).optional(),
 });
 

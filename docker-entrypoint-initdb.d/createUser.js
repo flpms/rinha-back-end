@@ -16,5 +16,5 @@ db.pessoas.createIndex({
 }, {
   unique: true
 });
-db.users.getIndexes();
+db.pessoas.getIndexes();
 db.createCollection('pessoas');
