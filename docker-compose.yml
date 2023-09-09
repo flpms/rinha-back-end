@@ -2,11 +2,11 @@ version: '3.5'
 services:
   db: # Banco de dados
     image: mongo:6.0.9-jammy
-    network_mode: host
     ports:
       - "27017:27017/tcp"
     restart: always
     environment:
+      network_mode: host
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: passRoot
       MONGO_INITDB_DATABASE: admin
@@ -29,7 +29,6 @@ services:
       DB_PORT: 27017
     ports:
       - "3001:3001"
-    network_mode: host
     depends_on:
       - db
     restart: always
