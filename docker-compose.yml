@@ -2,6 +2,7 @@ version: '3.5'
 services:
   db: # Banco de dados
     image: mongo:6.0.9-jammy
+    network_mode: host
     ports:
       - "27017:27017/tcp"
     restart: always
@@ -28,6 +29,7 @@ services:
       DB_PORT: 27017
     ports:
       - "3001:3001"
+    network_mode: host
     depends_on:
       - db
     restart: always
@@ -36,29 +38,31 @@ services:
         limits:
           cpus: '0.5'
           memory: '0.5GB'
-  # api2:
-  #   build:
-  #     context: ./
-  #   environment:
-  #     PORT: 3002
-  #     DB_USER: rinhaRoot
-  #     DB_PASS: rinhaRootSecret
-  #     DB_SRVR: db
-  #     DB_NAME: RINHA_DB
-  #     DB_PORT: 27017
-  #   restart: always
-  #   ports:
-  #     - "3002:3002"
-  #   depends_on:
-  #     - db
-  #   deploy:
-  #     resources:
-  #       limits:
-  #         cpus: '0.37'
-  #         memory: '0.25GB'
+  api2:
+    build:
+      context: ./
+    environment:
+      PORT: 3002
+      DB_USER: rinhaRoot
+      DB_PASS: rinhaRootSecret
+      DB_SRVR: db
+      DB_NAME: RINHA_DB
+      DB_PORT: 27017
+    restart: always
+    ports:
+      - "3002:3002"
+    depends_on:
+      - db
+    network_mode: host
+    deploy:
+      resources:
+        limits:
+          cpus: '0.37'
+          memory: '0.25GB'
   nginx: # Load Balancer
     image: nginx:stable-alpine
     restart: always
+    network_mode: host
     volumes:
       - ./rinha-nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
