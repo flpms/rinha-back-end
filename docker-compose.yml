@@ -52,7 +52,6 @@ services:
       - "3002:3002"
     depends_on:
       - db
-    network_mode: host
     deploy:
       resources:
         limits:
@@ -68,6 +67,11 @@ services:
       - api1
     ports:
       - "9999:9999"
+    ulimits:
+      nproc: 1000000
+      nofile:
+        soft: 1000000
+        hard: 1000000
     deploy:
       resources:
         limits:
